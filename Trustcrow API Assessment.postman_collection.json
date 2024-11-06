@@ -1,0 +1,1186 @@
+{
+	"info": {
+		"_postman_id": "6dba3d8e-80b3-433e-83e9-293c77b2358b",
+		"name": "Trustcrow API Assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37773359"
+	},
+	"item": [
+		{
+			"name": "SIGNUP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify Response has the required fields - name, email, createdAt, and updatedAt\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData.data).to.be.an('object');\r",
+							"    pm.expect(responseData.data.name).to.exist;\r",
+							"    pm.expect(responseData.data.email).to.exist;\r",
+							"    pm.expect(responseData.data.createdAt).to.exist;\r",
+							"    pm.expect(responseData.data.updatedAt).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify Name and email is non-empty strings\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.data).to.be.an('object');\r",
+							"  pm.expect(responseData.data.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");\r",
+							"  pm.expect(responseData.data.email).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Email should not be empty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Email is in a valid email format\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.data.email).to.be.a('string').and.to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"{{$randomEmail}}\",\r\n    \"password\": \"Password@@1\",\r\n    \"name\":\"{{$randomFirstName}} {{$randomLastName}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://invoicing-backend-eozb.onrender.com/api/auth/signup",
+					"protocol": "https",
+					"host": [
+						"invoicing-backend-eozb",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"{{$randomEmail}}\",\r\n    \"password\": \"Password@@1\",\r\n    \"name\":\"{{$randomFirstName}} {{$randomLastName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoicing-backend-eozb.onrender.com/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"invoicing-backend-eozb",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 06 Nov 2024 08:05:16 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "157"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "8de393d75d899f6c-AMS"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"dc-/xrWT5eYiZd6wWmaVnVulU/UUh8\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "770f37df-10fb-421a"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"isSuccessful\": true,\n    \"statusCode\": 200,\n    \"message\": \"User created successfully\",\n    \"data\": {\n        \"name\": \"Osvaldo Hodkiewicz\",\n        \"email\": \"Damien40@yahoo.com\",\n        \"createdAt\": \"2024-11-06T08:05:16.533Z\",\n        \"updatedAt\": \"2024-11-06T08:05:16.533Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "LOGIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify Response has the required fields - isSuccessful, statusCode, message, data\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.isSuccessful).to.exist;\r",
+							"    pm.expect(responseData.statusCode).to.exist;\r",
+							"    pm.expect(responseData.message).to.exist;\r",
+							"    pm.expect(responseData.data).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the data object schema - token, user\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data).to.be.an('object');\r",
+							"    pm.expect(responseData.data.token).to.be.a('string');\r",
+							"    pm.expect(responseData.data.user).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify Email in the user object is in a valid format\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.data.user.email).to.be.a('string').and.to.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"Damien40@yahoo.com\",\r\n    \"password\":\"Password@@1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://invoicing-backend-eozb.onrender.com/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"invoicing-backend-eozb",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"Damien40@yahoo.com\",\r\n    \"password\":\"Password@@1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoicing-backend-eozb.onrender.com/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"invoicing-backend-eozb",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 06 Nov 2024 08:07:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "369"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "8de3976c1fb16564-AMS"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d0-EwVfk48FObMUXTf71dmqwHvRw/I\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "01db655d-49e5-4904"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"isSuccessful\": true,\n    \"statusCode\": 200,\n    \"message\": \"Login successfully\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc2YjI3MzU1LTM4NDMtNDk3NS1hYTU3LWMzYTdkZmUyYTYxMCIsImlhdCI6MTczMDg4MDQ2MywiZXhwIjoxNzMxMTM5NjYzfQ.33RClarglSeg4JxKaDEygEQScCsbopEpc53E9l6BE40\",\n        \"user\": {\n            \"id\": \"76b27355-3843-4975-aa57-c3a7dfe2a610\",\n            \"createdAt\": \"2024-11-06T08:05:16.533Z\",\n            \"updatedAt\": \"2024-11-06T08:05:16.533Z\",\n            \"name\": \"Osvaldo Hodkiewicz\",\n            \"email\": \"Damien40@yahoo.com\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "CREATE INVOICE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Response status code is 201\", function () {\r",
+							"  pm.expect(pm.response).to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.isSuccessful).to.exist;\r",
+							"    pm.expect(responseData.statusCode).to.exist;\r",
+							"    pm.expect(responseData.message).to.exist;\r",
+							"    pm.expect(responseData.data).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Product details have the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.data.details).to.be.an('array');\r",
+							"    responseData.data.details.forEach(function(detail) {\r",
+							"        pm.expect(detail).to.have.property('productCode');\r",
+							"        pm.expect(detail).to.have.property('productDescription');\r",
+							"        pm.expect(detail).to.have.property('productPricePerUnit');\r",
+							"        pm.expect(detail).to.have.property('productQuantity');\r",
+							"        pm.expect(detail).to.have.property('lineTotal');\r",
+							"        pm.expect(detail).to.have.property('id');\r",
+							"        pm.expect(detail).to.have.property('createdAt');\r",
+							"        pm.expect(detail).to.have.property('updatedAt');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc2YjI3MzU1LTM4NDMtNDk3NS1hYTU3LWMzYTdkZmUyYTYxMCIsImlhdCI6MTczMDg4MDQ2MywiZXhwIjoxNzMxMTM5NjYzfQ.33RClarglSeg4JxKaDEygEQScCsbopEpc53E9l6BE40",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"76b27355-3843-4975-aa57-c3a7dfe2a610\",\r\n    \"customerName\":\"Osvaldo Hodkiewicz\",\r\n    \"customerAddress\":\"Lagos Nigeria\",\r\n    \"details\":[\r\n        {\r\n        \"productCode\":\"Trust002\",\r\n        \"productDescription\":\"Bungalow\",\r\n        \"productQuantity\":\"2\",\r\n        \"productPricePerUnit\":\"5000\"\r\n\r\n        }\r\n    ]\r\n\r\n    } ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://invoicing-backend-eozb.onrender.com/api/invoice/create",
+					"protocol": "https",
+					"host": [
+						"invoicing-backend-eozb",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"invoice",
+						"create"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "CREATE INVOICE",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"76b27355-3843-4975-aa57-c3a7dfe2a610\",\r\n    \"customerName\":\"Osvaldo Hodkiewicz\",\r\n    \"customerAddress\":\"Lagos Nigeria\",\r\n    \"details\":[\r\n        {\r\n        \"productCode\":\"Trust002\",\r\n        \"productDescription\":\"Bungalow\",\r\n        \"productQuantity\":\"2\",\r\n        \"productPricePerUnit\":\"5000\"\r\n\r\n        }\r\n    ]\r\n\r\n    } ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoicing-backend-eozb.onrender.com/api/invoice/create",
+							"protocol": "https",
+							"host": [
+								"invoicing-backend-eozb",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"create"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 06 Nov 2024 08:25:18 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "365"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "8de3b132d82a0bda-AMS"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"29d-yr93Kg3WeMDyBorJDC5SDYZob4s\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "39950de1-5aa4-4e63"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"isSuccessful\": true,\n    \"statusCode\": 201,\n    \"message\": \"Invoice created successfully\",\n    \"data\": {\n        \"customerName\": \"Osvaldo Hodkiewicz\",\n        \"customerAddress\": \"Lagos Nigeria\",\n        \"userId\": \"76b27355-3843-4975-aa57-c3a7dfe2a610\",\n        \"details\": [\n            {\n                \"productCode\": \"Trust002\",\n                \"productDescription\": \"Bungalow\",\n                \"productPricePerUnit\": \"5000\",\n                \"productQuantity\": \"2\",\n                \"lineTotal\": \"10000.00\",\n                \"id\": \"1cba583a-3ed5-47d6-ad57-f4892547e797\",\n                \"createdAt\": \"2024-11-06T08:25:18.772Z\",\n                \"updatedAt\": \"2024-11-06T08:25:18.772Z\"\n            }\n        ],\n        \"productSubtotal\": \"10000.00\",\n        \"invoiceTotal\": \"10000.00\",\n        \"id\": \"6d04ccb3-bf77-42f3-83e6-c47a41e29ffd\",\n        \"createdAt\": \"2024-11-06T08:25:18.772Z\",\n        \"updatedAt\": \"2024-11-06T08:25:18.772Z\",\n        \"invoiceNumber\": 14\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Retrieve All Invoices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Response status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the 'isSuccessful' field in the response schema\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.have.property('isSuccessful');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify StatusCode field exists in the response schema\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.have.property('statusCode');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify Message field exists in the response schema\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.have.property('message');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify Data array is present and contains expected fields and data types\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.data).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+							"\r",
+							"    responseData.data.forEach(function(item) {\r",
+							"        pm.expect(item).to.have.property('id').that.is.a('string');\r",
+							"        pm.expect(item).to.have.property('createdAt').that.is.a('string');\r",
+							"        pm.expect(item).to.have.property('updatedAt').that.is.a('string');\r",
+							"        pm.expect(item).to.have.property('invoiceNumber').that.is.a('number');\r",
+							"        pm.expect(item).to.have.property('customerName').that.is.a('string');\r",
+							"        pm.expect(item).to.have.property('customerAddress').that.is.a('string');\r",
+							"        pm.expect(item).to.have.property('productSubtotal').that.is.a('string');\r",
+							"        pm.expect(item).to.have.property('invoiceTotal').that.is.a('string');\r",
+							"        pm.expect(item).to.have.property('userId').that.is.a('string');\r",
+							"        \r",
+							"        item.details.forEach(function(detail) {\r",
+							"            pm.expect(detail).to.have.property('id').that.is.a('string');\r",
+							"            pm.expect(detail).to.have.property('createdAt').that.is.a('string');\r",
+							"            pm.expect(detail).to.have.property('updatedAt').that.is.a('string');\r",
+							"            pm.expect(detail).to.have.property('productCode').that.is.a('string');\r",
+							"            pm.expect(detail).to.have.property('productDescription').that.is.a('string');\r",
+							"            pm.expect(detail).to.have.property('productPricePerUnit').that.is.a('string');\r",
+							"            pm.expect(detail).to.have.property('productQuantity').that.is.a('number');\r",
+							"            pm.expect(detail).to.have.property('lineTotal').that.is.a('string');\r",
+							"        });\r",
+							"\r",
+							"        pm.expect(item.user).to.have.property('id').that.is.a('string');\r",
+							"        pm.expect(item.user).to.have.property('name').that.is.a('string');\r",
+							"        pm.expect(item.user).to.have.property('email').that.is.a('string');\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc2YjI3MzU1LTM4NDMtNDk3NS1hYTU3LWMzYTdkZmUyYTYxMCIsImlhdCI6MTczMDg4MDQ2MywiZXhwIjoxNzMxMTM5NjYzfQ.33RClarglSeg4JxKaDEygEQScCsbopEpc53E9l6BE40",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://invoicing-backend-eozb.onrender.com/api/invoice/all",
+					"protocol": "https",
+					"host": [
+						"invoicing-backend-eozb",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"invoice",
+						"all"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Retrieve All Invoices",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoicing-backend-eozb.onrender.com/api/invoice/all",
+							"protocol": "https",
+							"host": [
+								"invoicing-backend-eozb",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"all"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 06 Nov 2024 08:18:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2308"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "8de3a6cc5bbd012e-AMS"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3ef5-TYDVfoRVsP7uxFXPUk801EWdJA0\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "4f95c1ba-3c2c-43de"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"isSuccessful\": true,\n    \"statusCode\": 200,\n    \"message\": \"All invoices fetched successfully\",\n    \"data\": [\n        {\n            \"id\": \"6daf2d9e-7e89-4350-ba4b-b172ae4b3d40\",\n            \"createdAt\": \"2024-11-04T20:27:28.802Z\",\n            \"updatedAt\": \"2024-11-04T20:27:28.802Z\",\n            \"invoiceNumber\": 1,\n            \"customerName\": \"AAnibi\",\n            \"customerAddress\": \"123 Main St, Anytown, USA\",\n            \"productSubtotal\": \"41.00\",\n            \"invoiceTotal\": \"41.00\",\n            \"userId\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n            \"details\": [\n                {\n                    \"id\": \"0dec4c15-d694-45f0-a38d-41646046bfe4\",\n                    \"createdAt\": \"2024-11-04T20:27:28.802Z\",\n                    \"updatedAt\": \"2024-11-04T20:27:28.802Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Product 1 Description\",\n                    \"productPricePerUnit\": \"10.50\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"21.00\"\n                },\n                {\n                    \"id\": \"2a4e1961-21d0-4782-aef1-d52205378caf\",\n                    \"createdAt\": \"2024-11-04T20:27:28.802Z\",\n                    \"updatedAt\": \"2024-11-04T20:27:28.802Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Product 2 Description\",\n                    \"productPricePerUnit\": \"20.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"20.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n                \"name\": \"AAnibi\",\n                \"email\": \"adedoyinanibi@gmail.com\"\n            }\n        },\n        {\n            \"id\": \"74ded519-4e67-4997-8689-9997eeb90504\",\n            \"createdAt\": \"2024-11-04T20:32:56.065Z\",\n            \"updatedAt\": \"2024-11-04T20:32:56.065Z\",\n            \"invoiceNumber\": 2,\n            \"customerName\": \"AAnibi\",\n            \"customerAddress\": \"123 Main St, Anytown, USA\",\n            \"productSubtotal\": \"41.00\",\n            \"invoiceTotal\": \"41.00\",\n            \"userId\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n            \"details\": [\n                {\n                    \"id\": \"378cdfb3-f7f4-462e-a523-626c404b7a74\",\n                    \"createdAt\": \"2024-11-04T20:32:56.065Z\",\n                    \"updatedAt\": \"2024-11-04T20:32:56.065Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Product 1 Description\",\n                    \"productPricePerUnit\": \"10.50\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"21.00\"\n                },\n                {\n                    \"id\": \"f9d1bf48-8a16-41a1-865e-d5711559bd7a\",\n                    \"createdAt\": \"2024-11-04T20:32:56.065Z\",\n                    \"updatedAt\": \"2024-11-04T20:32:56.065Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Product 2 Description\",\n                    \"productPricePerUnit\": \"20.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"20.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n                \"name\": \"AAnibi\",\n                \"email\": \"adedoyinanibi@gmail.com\"\n            }\n        },\n        {\n            \"id\": \"5c5a4e1e-0531-4f8e-81a8-8add7eb8c700\",\n            \"createdAt\": \"2024-11-04T20:33:41.148Z\",\n            \"updatedAt\": \"2024-11-04T20:33:41.148Z\",\n            \"invoiceNumber\": 3,\n            \"customerName\": \"AAnibi\",\n            \"customerAddress\": \"123 Main St, Anytown, USA\",\n            \"productSubtotal\": \"41.00\",\n            \"invoiceTotal\": \"41.00\",\n            \"userId\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n            \"details\": [\n                {\n                    \"id\": \"6e22bb47-6b33-4410-9e30-ff9694004840\",\n                    \"createdAt\": \"2024-11-04T20:33:41.148Z\",\n                    \"updatedAt\": \"2024-11-04T20:33:41.148Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Product 1 Description\",\n                    \"productPricePerUnit\": \"10.50\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"21.00\"\n                },\n                {\n                    \"id\": \"98459415-d30a-4e75-9bd3-cc869051ba62\",\n                    \"createdAt\": \"2024-11-04T20:33:41.148Z\",\n                    \"updatedAt\": \"2024-11-04T20:33:41.148Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Product 2 Description\",\n                    \"productPricePerUnit\": \"20.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"20.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n                \"name\": \"AAnibi\",\n                \"email\": \"adedoyinanibi@gmail.com\"\n            }\n        },\n        {\n            \"id\": \"8083b897-1266-4408-9651-242625c97012\",\n            \"createdAt\": \"2024-11-04T20:34:03.602Z\",\n            \"updatedAt\": \"2024-11-04T20:34:03.602Z\",\n            \"invoiceNumber\": 4,\n            \"customerName\": \"AAnibi\",\n            \"customerAddress\": \"123 Main St, Anytown, USA\",\n            \"productSubtotal\": \"41.00\",\n            \"invoiceTotal\": \"41.00\",\n            \"userId\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n            \"details\": [\n                {\n                    \"id\": \"04fc8f58-114a-46ab-8c48-7046d87db002\",\n                    \"createdAt\": \"2024-11-04T20:34:03.602Z\",\n                    \"updatedAt\": \"2024-11-04T20:34:03.602Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Product 1 Description\",\n                    \"productPricePerUnit\": \"10.50\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"21.00\"\n                },\n                {\n                    \"id\": \"f9e6ba4c-9b6f-4b67-b048-bf3abc0ee83c\",\n                    \"createdAt\": \"2024-11-04T20:34:03.602Z\",\n                    \"updatedAt\": \"2024-11-04T20:34:03.602Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Product 2 Description\",\n                    \"productPricePerUnit\": \"20.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"20.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n                \"name\": \"AAnibi\",\n                \"email\": \"adedoyinanibi@gmail.com\"\n            }\n        },\n        {\n            \"id\": \"9fec777d-3e0f-4334-9ca8-a5a5fdc13750\",\n            \"createdAt\": \"2024-11-04T20:34:59.108Z\",\n            \"updatedAt\": \"2024-11-04T20:34:59.108Z\",\n            \"invoiceNumber\": 5,\n            \"customerName\": \"AAnibi\",\n            \"customerAddress\": \"123 Main St, Anytown, USA\",\n            \"productSubtotal\": \"161.00\",\n            \"invoiceTotal\": \"161.00\",\n            \"userId\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n            \"details\": [\n                {\n                    \"id\": \"921436d9-bde0-42e7-8f09-4e74be38a39e\",\n                    \"createdAt\": \"2024-11-04T20:34:59.108Z\",\n                    \"updatedAt\": \"2024-11-04T20:34:59.108Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Product 1 Description\",\n                    \"productPricePerUnit\": \"30.50\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"61.00\"\n                },\n                {\n                    \"id\": \"46038130-4f30-410b-a83b-55f4a19d9767\",\n                    \"createdAt\": \"2024-11-04T20:34:59.108Z\",\n                    \"updatedAt\": \"2024-11-04T20:34:59.108Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Product 2 Description\",\n                    \"productPricePerUnit\": \"100.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"100.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n                \"name\": \"AAnibi\",\n                \"email\": \"adedoyinanibi@gmail.com\"\n            }\n        },\n        {\n            \"id\": \"5258a0fa-7271-4661-8c46-4ec250d0ec0a\",\n            \"createdAt\": \"2024-11-04T20:35:53.342Z\",\n            \"updatedAt\": \"2024-11-04T20:35:53.342Z\",\n            \"invoiceNumber\": 6,\n            \"customerName\": \"AAnibiF\",\n            \"customerAddress\": \"123 Main St, Anytown, USA\",\n            \"productSubtotal\": \"161.00\",\n            \"invoiceTotal\": \"161.00\",\n            \"userId\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n            \"details\": [\n                {\n                    \"id\": \"f1741a07-347e-477c-b3ac-59fb4dd121a7\",\n                    \"createdAt\": \"2024-11-04T20:35:53.342Z\",\n                    \"updatedAt\": \"2024-11-04T20:35:53.342Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Product 1 Description\",\n                    \"productPricePerUnit\": \"30.50\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"61.00\"\n                },\n                {\n                    \"id\": \"6ac47184-d4e1-425e-ab3a-2cddd15b783a\",\n                    \"createdAt\": \"2024-11-04T20:35:53.342Z\",\n                    \"updatedAt\": \"2024-11-04T20:35:53.342Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Product 2 Description\",\n                    \"productPricePerUnit\": \"100.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"100.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n                \"name\": \"AAnibi\",\n                \"email\": \"adedoyinanibi@gmail.com\"\n            }\n        },\n        {\n            \"id\": \"8d9d2342-98db-49af-8557-dd73a8d5a02b\",\n            \"createdAt\": \"2024-11-04T20:42:08.902Z\",\n            \"updatedAt\": \"2024-11-04T20:42:08.902Z\",\n            \"invoiceNumber\": 7,\n            \"customerName\": \"AAnibiF\",\n            \"customerAddress\": \"123 Main St, Anytown, USA\",\n            \"productSubtotal\": \"161.00\",\n            \"invoiceTotal\": \"161.00\",\n            \"userId\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n            \"details\": [\n                {\n                    \"id\": \"840f178a-435a-477b-ad6a-a0c079419b9a\",\n                    \"createdAt\": \"2024-11-04T20:42:08.902Z\",\n                    \"updatedAt\": \"2024-11-04T20:42:08.902Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Product 1 Description\",\n                    \"productPricePerUnit\": \"30.50\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"61.00\"\n                },\n                {\n                    \"id\": \"f5d7222e-93c9-4a9c-a973-dbe3d13067f0\",\n                    \"createdAt\": \"2024-11-04T20:42:08.902Z\",\n                    \"updatedAt\": \"2024-11-04T20:42:08.902Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Product 2 Description\",\n                    \"productPricePerUnit\": \"100.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"100.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n                \"name\": \"AAnibi\",\n                \"email\": \"adedoyinanibi@gmail.com\"\n            }\n        },\n        {\n            \"id\": \"9554cb10-161d-48dd-89cc-f9273151b698\",\n            \"createdAt\": \"2024-11-04T20:48:25.814Z\",\n            \"updatedAt\": \"2024-11-04T20:48:25.814Z\",\n            \"invoiceNumber\": 8,\n            \"customerName\": \"AAnibiF\",\n            \"customerAddress\": \"123 Main St, Anytown, USA\",\n            \"productSubtotal\": \"161.00\",\n            \"invoiceTotal\": \"161.00\",\n            \"userId\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n            \"details\": [\n                {\n                    \"id\": \"cfa9741c-a1b2-4867-bdce-5de1421d539a\",\n                    \"createdAt\": \"2024-11-04T20:48:25.814Z\",\n                    \"updatedAt\": \"2024-11-04T20:48:25.814Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Product 1 Description\",\n                    \"productPricePerUnit\": \"30.50\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"61.00\"\n                },\n                {\n                    \"id\": \"5b35d93e-a607-493a-a7e8-08287d8161d7\",\n                    \"createdAt\": \"2024-11-04T20:48:25.814Z\",\n                    \"updatedAt\": \"2024-11-04T20:48:25.814Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Product 2 Description\",\n                    \"productPricePerUnit\": \"100.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"100.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"895db649-f850-4e9a-a4ed-052ab85b36fe\",\n                \"name\": \"AAnibi\",\n                \"email\": \"adedoyinanibi@gmail.com\"\n            }\n        },\n        {\n            \"id\": \"b3b26551-e1f9-437c-b15a-e4ae8e47af80\",\n            \"createdAt\": \"2024-11-05T12:41:01.522Z\",\n            \"updatedAt\": \"2024-11-05T12:41:01.522Z\",\n            \"invoiceNumber\": 9,\n            \"customerName\": \"PETER OBI\",\n            \"customerAddress\": \"123 Mende, MaryLand, Nigeria\",\n            \"productSubtotal\": \"21000.00\",\n            \"invoiceTotal\": \"21000.00\",\n            \"userId\": \"adaa00c4-1cf9-4d25-a43d-e410c427c5ab\",\n            \"details\": [\n                {\n                    \"id\": \"be927dae-7eae-4921-b912-8659a728ad8a\",\n                    \"createdAt\": \"2024-11-05T12:41:01.522Z\",\n                    \"updatedAt\": \"2024-11-05T12:41:01.522Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Widget A\",\n                    \"productPricePerUnit\": \"50.00\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"100.00\"\n                },\n                {\n                    \"id\": \"eec494ad-50d9-4e2b-94aa-5dc4a3eba73d\",\n                    \"createdAt\": \"2024-11-05T12:41:01.522Z\",\n                    \"updatedAt\": \"2024-11-05T12:41:01.522Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Widget B\",\n                    \"productPricePerUnit\": \"100.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"100.00\"\n                },\n                {\n                    \"id\": \"199af0a8-81b8-4131-9eb7-b5fed42b97b0\",\n                    \"createdAt\": \"2024-11-05T12:41:01.522Z\",\n                    \"updatedAt\": \"2024-11-05T12:41:01.522Z\",\n                    \"productCode\": \"P003\",\n                    \"productDescription\": \"Widget C\",\n                    \"productPricePerUnit\": \"2000.00\",\n                    \"productQuantity\": 4,\n                    \"lineTotal\": \"8000.00\"\n                },\n                {\n                    \"id\": \"e5527659-5a13-4a66-80ec-202b6c680f36\",\n                    \"createdAt\": \"2024-11-05T12:41:01.522Z\",\n                    \"updatedAt\": \"2024-11-05T12:41:01.522Z\",\n                    \"productCode\": \"P004\",\n                    \"productDescription\": \"Widget D\",\n                    \"productPricePerUnit\": \"1000.00\",\n                    \"productQuantity\": 10,\n                    \"lineTotal\": \"10000.00\"\n                },\n                {\n                    \"id\": \"bb08d5f4-043d-4406-9443-a0a2f3f87f1e\",\n                    \"createdAt\": \"2024-11-05T12:41:01.522Z\",\n                    \"updatedAt\": \"2024-11-05T12:41:01.522Z\",\n                    \"productCode\": \"P005\",\n                    \"productDescription\": \"Widget E\",\n                    \"productPricePerUnit\": \"400.00\",\n                    \"productQuantity\": 7,\n                    \"lineTotal\": \"2800.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"adaa00c4-1cf9-4d25-a43d-e410c427c5ab\",\n                \"name\": \"Peter James\",\n                \"email\": \"phil@example.com\"\n            }\n        },\n        {\n            \"id\": \"2783f1f3-2522-4635-817b-77ac2c59c3ec\",\n            \"createdAt\": \"2024-11-05T12:59:02.386Z\",\n            \"updatedAt\": \"2024-11-05T12:59:02.386Z\",\n            \"invoiceNumber\": 10,\n            \"customerName\": \"Olusegun Obasanjo\",\n            \"customerAddress\": \"456 New Benin, Benin, Nigeria\",\n            \"productSubtotal\": \"38100.00\",\n            \"invoiceTotal\": \"38100.00\",\n            \"userId\": \"adaa00c4-1cf9-4d25-a43d-e410c427c5ab\",\n            \"details\": [\n                {\n                    \"id\": \"994fe9e9-ac95-419a-8a14-5d3855f97679\",\n                    \"createdAt\": \"2024-11-05T12:59:02.386Z\",\n                    \"updatedAt\": \"2024-11-05T12:59:02.386Z\",\n                    \"productCode\": \"P006\",\n                    \"productDescription\": \"Widget F\",\n                    \"productPricePerUnit\": \"300.00\",\n                    \"productQuantity\": 6,\n                    \"lineTotal\": \"1800.00\"\n                },\n                {\n                    \"id\": \"ff17571d-0a92-4d05-8dfc-0a1c94f934ba\",\n                    \"createdAt\": \"2024-11-05T12:59:02.386Z\",\n                    \"updatedAt\": \"2024-11-05T12:59:02.386Z\",\n                    \"productCode\": \"P007\",\n                    \"productDescription\": \"Widget G\",\n                    \"productPricePerUnit\": \"700.00\",\n                    \"productQuantity\": 9,\n                    \"lineTotal\": \"6300.00\"\n                },\n                {\n                    \"id\": \"6ef03656-6e83-4436-b01b-fe4fba2df7d9\",\n                    \"createdAt\": \"2024-11-05T12:59:02.386Z\",\n                    \"updatedAt\": \"2024-11-05T12:59:02.386Z\",\n                    \"productCode\": \"P008\",\n                    \"productDescription\": \"Widget H\",\n                    \"productPricePerUnit\": \"2500.00\",\n                    \"productQuantity\": 5,\n                    \"lineTotal\": \"12500.00\"\n                },\n                {\n                    \"id\": \"50d62ab5-39e3-4cd0-adef-b54f350d5e64\",\n                    \"createdAt\": \"2024-11-05T12:59:02.386Z\",\n                    \"updatedAt\": \"2024-11-05T12:59:02.386Z\",\n                    \"productCode\": \"P009\",\n                    \"productDescription\": \"Widget I\",\n                    \"productPricePerUnit\": \"800.00\",\n                    \"productQuantity\": 15,\n                    \"lineTotal\": \"12000.00\"\n                },\n                {\n                    \"id\": \"3827944e-af5d-48cf-b952-ce89b0d661f5\",\n                    \"createdAt\": \"2024-11-05T12:59:02.386Z\",\n                    \"updatedAt\": \"2024-11-05T12:59:02.386Z\",\n                    \"productCode\": \"P010\",\n                    \"productDescription\": \"Widget J\",\n                    \"productPricePerUnit\": \"500.00\",\n                    \"productQuantity\": 11,\n                    \"lineTotal\": \"5500.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"adaa00c4-1cf9-4d25-a43d-e410c427c5ab\",\n                \"name\": \"Peter James\",\n                \"email\": \"phil@example.com\"\n            }\n        },\n        {\n            \"id\": \"22f74e75-0460-4391-8df8-feb61a62c03a\",\n            \"createdAt\": \"2024-11-05T13:08:13.341Z\",\n            \"updatedAt\": \"2024-11-05T13:08:13.341Z\",\n            \"invoiceNumber\": 11,\n            \"customerName\": \"PETER OBI\",\n            \"customerAddress\": \"123 Mende, MaryLand, Nigeria\",\n            \"productSubtotal\": \"21000.00\",\n            \"invoiceTotal\": \"21000.00\",\n            \"userId\": \"adaa00c4-1cf9-4d25-a43d-e410c427c5ab\",\n            \"details\": [\n                {\n                    \"id\": \"0be5bec1-2123-43ba-8fd9-1ec7bb097cda\",\n                    \"createdAt\": \"2024-11-05T13:08:13.341Z\",\n                    \"updatedAt\": \"2024-11-05T13:08:13.341Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Widget A\",\n                    \"productPricePerUnit\": \"50.00\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"100.00\"\n                },\n                {\n                    \"id\": \"87d6413c-e059-477a-8555-72746637e94c\",\n                    \"createdAt\": \"2024-11-05T13:08:13.341Z\",\n                    \"updatedAt\": \"2024-11-05T13:08:13.341Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Widget B\",\n                    \"productPricePerUnit\": \"100.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"100.00\"\n                },\n                {\n                    \"id\": \"24aae579-d009-41c6-8d18-b1d2f9b1c814\",\n                    \"createdAt\": \"2024-11-05T13:08:13.341Z\",\n                    \"updatedAt\": \"2024-11-05T13:08:13.341Z\",\n                    \"productCode\": \"P003\",\n                    \"productDescription\": \"Widget C\",\n                    \"productPricePerUnit\": \"2000.00\",\n                    \"productQuantity\": 4,\n                    \"lineTotal\": \"8000.00\"\n                },\n                {\n                    \"id\": \"e3b7c2d6-af20-4040-bf06-6f1bbc71cd69\",\n                    \"createdAt\": \"2024-11-05T13:08:13.341Z\",\n                    \"updatedAt\": \"2024-11-05T13:08:13.341Z\",\n                    \"productCode\": \"P004\",\n                    \"productDescription\": \"Widget D\",\n                    \"productPricePerUnit\": \"1000.00\",\n                    \"productQuantity\": 10,\n                    \"lineTotal\": \"10000.00\"\n                },\n                {\n                    \"id\": \"f4047623-180f-49fb-a244-5ef6133b12da\",\n                    \"createdAt\": \"2024-11-05T13:08:13.341Z\",\n                    \"updatedAt\": \"2024-11-05T13:08:13.341Z\",\n                    \"productCode\": \"P005\",\n                    \"productDescription\": \"Widget E\",\n                    \"productPricePerUnit\": \"400.00\",\n                    \"productQuantity\": 7,\n                    \"lineTotal\": \"2800.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"adaa00c4-1cf9-4d25-a43d-e410c427c5ab\",\n                \"name\": \"Peter James\",\n                \"email\": \"phil@example.com\"\n            }\n        },\n        {\n            \"id\": \"8afc92f7-bec9-4ce7-a286-cdcdbb2c230a\",\n            \"createdAt\": \"2024-11-05T13:15:09.007Z\",\n            \"updatedAt\": \"2024-11-05T13:15:09.007Z\",\n            \"invoiceNumber\": 12,\n            \"customerName\": \"Musa Yar'Adua\",\n            \"customerAddress\": \"456 New Benin, Benin, Nigeria\",\n            \"productSubtotal\": \"69900.00\",\n            \"invoiceTotal\": \"69900.00\",\n            \"userId\": \"adaa00c4-1cf9-4d25-a43d-e410c427c5ab\",\n            \"details\": [\n                {\n                    \"id\": \"4e3db89d-7b72-4af6-a68b-41be43511cf5\",\n                    \"createdAt\": \"2024-11-05T13:15:09.007Z\",\n                    \"updatedAt\": \"2024-11-05T13:15:09.007Z\",\n                    \"productCode\": \"P011\",\n                    \"productDescription\": \"Widget K\",\n                    \"productPricePerUnit\": \"1800.00\",\n                    \"productQuantity\": 12,\n                    \"lineTotal\": \"21600.00\"\n                },\n                {\n                    \"id\": \"ba328c9e-0455-4624-a509-c3f4a4abaa53\",\n                    \"createdAt\": \"2024-11-05T13:15:09.007Z\",\n                    \"updatedAt\": \"2024-11-05T13:15:09.007Z\",\n                    \"productCode\": \"P012\",\n                    \"productDescription\": \"Widget L\",\n                    \"productPricePerUnit\": \"700.00\",\n                    \"productQuantity\": 7,\n                    \"lineTotal\": \"4900.00\"\n                },\n                {\n                    \"id\": \"05bdb63b-eb51-4070-a75a-2697e5439d4f\",\n                    \"createdAt\": \"2024-11-05T13:15:09.007Z\",\n                    \"updatedAt\": \"2024-11-05T13:15:09.007Z\",\n                    \"productCode\": \"P013\",\n                    \"productDescription\": \"Widget M\",\n                    \"productPricePerUnit\": \"3000.00\",\n                    \"productQuantity\": 4,\n                    \"lineTotal\": \"12000.00\"\n                },\n                {\n                    \"id\": \"9259d2f6-7538-4315-8af9-36a54350f21e\",\n                    \"createdAt\": \"2024-11-05T13:15:09.007Z\",\n                    \"updatedAt\": \"2024-11-05T13:15:09.007Z\",\n                    \"productCode\": \"P014\",\n                    \"productDescription\": \"Widget N\",\n                    \"productPricePerUnit\": \"800.00\",\n                    \"productQuantity\": 8,\n                    \"lineTotal\": \"6400.00\"\n                },\n                {\n                    \"id\": \"43ed95fd-9363-4f5f-b5ac-5262e3e360d3\",\n                    \"createdAt\": \"2024-11-05T13:15:09.007Z\",\n                    \"updatedAt\": \"2024-11-05T13:15:09.007Z\",\n                    \"productCode\": \"P015\",\n                    \"productDescription\": \"Widget O\",\n                    \"productPricePerUnit\": \"5000.00\",\n                    \"productQuantity\": 5,\n                    \"lineTotal\": \"25000.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"adaa00c4-1cf9-4d25-a43d-e410c427c5ab\",\n                \"name\": \"Peter James\",\n                \"email\": \"phil@example.com\"\n            }\n        },\n        {\n            \"id\": \"7bdcc8ab-5c57-49a2-9543-1b26503ff86f\",\n            \"createdAt\": \"2024-11-05T18:54:49.350Z\",\n            \"updatedAt\": \"2024-11-05T18:54:49.350Z\",\n            \"invoiceNumber\": 13,\n            \"customerName\": \"PETER OBI\",\n            \"customerAddress\": \"123 Mende, MaryLand, Nigeria\",\n            \"productSubtotal\": \"21000.00\",\n            \"invoiceTotal\": \"21000.00\",\n            \"userId\": \"adaa00c4-1cf9-4d25-a43d-e410c427c5ab\",\n            \"details\": [\n                {\n                    \"id\": \"6d247ecb-d742-499a-b660-c8fa67801708\",\n                    \"createdAt\": \"2024-11-05T18:54:49.350Z\",\n                    \"updatedAt\": \"2024-11-05T18:54:49.350Z\",\n                    \"productCode\": \"P001\",\n                    \"productDescription\": \"Widget A\",\n                    \"productPricePerUnit\": \"50.00\",\n                    \"productQuantity\": 2,\n                    \"lineTotal\": \"100.00\"\n                },\n                {\n                    \"id\": \"4ba2ec16-d41e-4686-953c-7c19a0ac9034\",\n                    \"createdAt\": \"2024-11-05T18:54:49.350Z\",\n                    \"updatedAt\": \"2024-11-05T18:54:49.350Z\",\n                    \"productCode\": \"P002\",\n                    \"productDescription\": \"Widget B\",\n                    \"productPricePerUnit\": \"100.00\",\n                    \"productQuantity\": 1,\n                    \"lineTotal\": \"100.00\"\n                },\n                {\n                    \"id\": \"cc01a9bb-f152-44e4-8a30-916e617cb7a7\",\n                    \"createdAt\": \"2024-11-05T18:54:49.350Z\",\n                    \"updatedAt\": \"2024-11-05T18:54:49.350Z\",\n                    \"productCode\": \"P003\",\n                    \"productDescription\": \"Widget C\",\n                    \"productPricePerUnit\": \"2000.00\",\n                    \"productQuantity\": 4,\n                    \"lineTotal\": \"8000.00\"\n                },\n                {\n                    \"id\": \"3fdbd8d4-068f-4ddb-9be7-8f44a8866fe9\",\n                    \"createdAt\": \"2024-11-05T18:54:49.350Z\",\n                    \"updatedAt\": \"2024-11-05T18:54:49.350Z\",\n                    \"productCode\": \"P004\",\n                    \"productDescription\": \"Widget D\",\n                    \"productPricePerUnit\": \"1000.00\",\n                    \"productQuantity\": 10,\n                    \"lineTotal\": \"10000.00\"\n                },\n                {\n                    \"id\": \"4c91a755-6ba9-493f-8209-3ed629c5a71b\",\n                    \"createdAt\": \"2024-11-05T18:54:49.350Z\",\n                    \"updatedAt\": \"2024-11-05T18:54:49.350Z\",\n                    \"productCode\": \"P005\",\n                    \"productDescription\": \"Widget E\",\n                    \"productPricePerUnit\": \"400.00\",\n                    \"productQuantity\": 7,\n                    \"lineTotal\": \"2800.00\"\n                }\n            ],\n            \"user\": {\n                \"id\": \"adaa00c4-1cf9-4d25-a43d-e410c427c5ab\",\n                \"name\": \"Peter James\",\n                \"email\": \"phil@example.com\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Retrieve Single Invoice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the data schema for 'isSuccessful', 'statusCode', 'message', 'data' fields\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"\r",
+							"  pm.expect(responseData).to.be.an('object');\r",
+							"  pm.expect(responseData.isSuccessful).to.exist.and.to.be.a('boolean');\r",
+							"  pm.expect(responseData.statusCode).to.exist.and.to.be.a('number');\r",
+							"  pm.expect(responseData.message).to.exist.and.to.be.a('string');\r",
+							"  pm.expect(responseData.data).to.exist.and.to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify Details array is present and has expected number of elements\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.have.property('data');\r",
+							"    pm.expect(responseData.data).to.have.property('details').that.is.an('array');\r",
+							"    pm.expect(responseData.data.details).to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc2YjI3MzU1LTM4NDMtNDk3NS1hYTU3LWMzYTdkZmUyYTYxMCIsImlhdCI6MTczMDg4MDQ2MywiZXhwIjoxNzMxMTM5NjYzfQ.33RClarglSeg4JxKaDEygEQScCsbopEpc53E9l6BE40",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://invoicing-backend-eozb.onrender.com/api/invoice/6d04ccb3-bf77-42f3-83e6-c47a41e29ffd",
+					"protocol": "https",
+					"host": [
+						"invoicing-backend-eozb",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"invoice",
+						"6d04ccb3-bf77-42f3-83e6-c47a41e29ffd"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://invoicing-backend-eozb.onrender.com/api/invoice/6d04ccb3-bf77-42f3-83e6-c47a41e29ffd",
+							"protocol": "https",
+							"host": [
+								"invoicing-backend-eozb",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"6d04ccb3-bf77-42f3-83e6-c47a41e29ffd"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 06 Nov 2024 08:26:52 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "395"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "8de3b37a29aeb975-AMS"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"30c-CA2lMAmACn2ZDE4s0VJI2WSjmcs\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "de394a9f-88b2-4ebe"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"isSuccessful\": true,\n    \"statusCode\": 200,\n    \"message\": \"Invoice fetched successfully\",\n    \"data\": {\n        \"id\": \"6d04ccb3-bf77-42f3-83e6-c47a41e29ffd\",\n        \"createdAt\": \"2024-11-06T08:25:18.772Z\",\n        \"updatedAt\": \"2024-11-06T08:25:18.772Z\",\n        \"invoiceNumber\": 14,\n        \"customerName\": \"Osvaldo Hodkiewicz\",\n        \"customerAddress\": \"Lagos Nigeria\",\n        \"productSubtotal\": \"10000.00\",\n        \"invoiceTotal\": \"10000.00\",\n        \"userId\": \"76b27355-3843-4975-aa57-c3a7dfe2a610\",\n        \"details\": [\n            {\n                \"id\": \"1cba583a-3ed5-47d6-ad57-f4892547e797\",\n                \"createdAt\": \"2024-11-06T08:25:18.772Z\",\n                \"updatedAt\": \"2024-11-06T08:25:18.772Z\",\n                \"productCode\": \"Trust002\",\n                \"productDescription\": \"Bungalow\",\n                \"productPricePerUnit\": \"5000.00\",\n                \"productQuantity\": 2,\n                \"lineTotal\": \"10000.00\"\n            }\n        ],\n        \"user\": {\n            \"id\": \"76b27355-3843-4975-aa57-c3a7dfe2a610\",\n            \"name\": \"Osvaldo Hodkiewicz\",\n            \"email\": \"Damien40@yahoo.com\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Invalid Endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Response status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(404);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify Response has the required fields - message, error, and statusCode\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.exist;\r",
+							"    pm.expect(responseData.error).to.exist;\r",
+							"    pm.expect(responseData.statusCode).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Veirfy Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify Error is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.error).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Error should not be empty\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://invoicing-backend-eozb.onrender.com/api/invalid_endpoint",
+					"protocol": "https",
+					"host": [
+						"invoicing-backend-eozb",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"invalid_endpoint"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://invoicing-backend-eozb.onrender.com/api/invalid_endpoint",
+							"protocol": "https",
+							"host": [
+								"invoicing-backend-eozb",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"invalid_endpoint"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 06 Nov 2024 08:43:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "83"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "8de3cc5dbae966e7-AMS"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"53-fv6Hb4yLFdeUdkYSYJh7pXGqI0M\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "ff66ee04-9934-414f"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Cannot GET /api/invalid_endpoint\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+				}
+			]
+		},
+		{
+			"name": "Unauthorized Access",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Response status code is 401\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(401);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify Response has the required fields - message and statusCode\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.exist;\r",
+							"    pm.expect(responseData.statusCode).to.exist;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://invoicing-backend-eozb.onrender.com/api/invoice/all",
+					"protocol": "https",
+					"host": [
+						"invoicing-backend-eozb",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"invoice",
+						"all"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://invoicing-backend-eozb.onrender.com/api/invoice/all",
+							"protocol": "https",
+							"host": [
+								"invoicing-backend-eozb",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"all"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 06 Nov 2024 08:45:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "47"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "8de3cf194e8766e7-AMS"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2b-dGnJzt6gv1nJjX6DJ9RztDWptng\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "06e056b1-15e2-4efb"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Unauthorized\",\n    \"statusCode\": 401\n}"
+				}
+			]
+		}
+	]
+}
